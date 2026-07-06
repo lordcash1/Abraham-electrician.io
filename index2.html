@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abraham Electrician — Licensed Residential & Commercial Electrical</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#12161C;
+    --navy-2:#1B222B;
+    --panel:#232C36;
+    --copper:#C97D3C;
+    --copper-bright:#E39A5A;
+    --caution:#F2B705;
+    --off-white:#EDEDEA;
+    --muted:#8B95A1;
+    --line:#333E4A;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy);
+    color:var(--off-white);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Archivo', sans-serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{
+    max-width:1160px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Focus visibility ---------- */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--caution);
+    outline-offset:3px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(18,22,28,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 24px;
+    max-width:1160px; margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-size:1.15rem; font-weight:800; letter-spacing:-0.02em;
+  }
+  .brand .bolt{ color:var(--copper); }
+  nav.links{ display:flex; gap:28px; font-size:0.92rem; color:var(--muted); }
+  nav.links a:hover{ color:var(--off-white); }
+  .call-btn{
+    background:var(--copper);
+    color:#14181D;
+    font-weight:600;
+    font-size:0.9rem;
+    padding:10px 18px;
+    border-radius:4px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background 0.15s ease;
+  }
+  .call-btn:hover{ background:var(--copper-bright); }
+  @media (max-width:760px){ nav.links{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:80px 0 40px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:900px){ .hero{ grid-template-columns:1fr; padding:48px 0 24px; } }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--copper);
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:''; width:26px; height:1px; background:var(--copper);
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 5vw, 3.4rem);
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  .hero h1 .accent{ color:var(--copper); }
+  .hero p.lede{
+    color:var(--muted);
+    font-size:1.08rem;
+    max-width:46ch;
+    margin-bottom:30px;
+  }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn-primary{
+    background:var(--copper); color:#14181D; font-weight:600;
+    padding:14px 24px; border-radius:4px; text-decoration:none; font-size:0.95rem;
+    transition:background 0.15s ease;
+  }
+  .btn-primary:hover{ background:var(--copper-bright); }
+  .btn-secondary{
+    border:1px solid var(--line); color:var(--off-white);
+    padding:14px 24px; border-radius:4px; text-decoration:none; font-size:0.95rem;
+    transition:border-color 0.15s ease;
+  }
+  .btn-secondary:hover{ border-color:var(--copper); }
+  .trust-row{
+    margin-top:34px; display:flex; gap:26px; flex-wrap:wrap;
+    font-size:0.82rem; color:var(--muted);
+  }
+  .trust-row span{ display:flex; align-items:center; gap:7px; }
+  .trust-row .dot{ width:5px; height:5px; border-radius:50%; background:var(--caution); }
+
+  /* ---------- Breaker panel (signature element) ---------- */
+  .panel-box{
+    background:linear-gradient(180deg, var(--panel), #1a2028);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:22px 22px 18px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  .panel-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding-bottom:14px; margin-bottom:14px; border-bottom:1px dashed var(--line);
+  }
+  .panel-head .mono{ font-size:0.72rem; color:var(--muted); letter-spacing:0.06em; }
+  .panel-head .mono.live{ color:var(--caution); }
+  .breaker-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  }
+  .breaker{
+    background:#171D25;
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:12px 12px 14px;
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+    color:var(--off-white);
+    position:relative;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .breaker:hover, .breaker:focus-visible{ border-color:var(--copper); background:#1c232c; }
+  .breaker .label{ font-size:0.78rem; font-weight:600; display:block; margin-bottom:10px; }
+  .switch-track{
+    width:30px; height:14px; border-radius:8px; background:#0d1116;
+    position:relative; border:1px solid var(--line);
+  }
+  .switch-knob{
+    position:absolute; top:1px; left:1px; width:10px; height:10px; border-radius:50%;
+    background:var(--muted);
+    transition:left 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .breaker.on .switch-knob{
+    left:17px; background:var(--caution);
+    box-shadow:0 0 8px 1px rgba(242,183,5,0.7);
+  }
+  .breaker.on{ border-color:var(--copper); }
+  .panel-readout{
+    margin-top:16px; padding-top:14px; border-top:1px dashed var(--line);
+    font-size:0.82rem; color:var(--muted); min-height:38px;
+  }
+  .panel-readout .service-name{ color:var(--copper-bright); font-weight:600; }
+  .panel-foot{
+    margin-top:14px; font-size:0.68rem; color:#5a6570; text-align:center;
+  }
+
+  /* ---------- Sections generic ---------- */
+  section{ padding:70px 0; }
+  .section-head{ max-width:640px; margin-bottom:44px; }
+  .section-head .eyebrow{ margin-bottom:14px; }
+  .section-head h2{ font-size:clamp(1.7rem, 3.4vw, 2.3rem); margin-bottom:14px; }
+  .section-head p{ color:var(--muted); font-size:1.02rem; }
+
+  /* ---------- Services grid ---------- */
+  #services{ background:var(--navy-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden;
+  }
+  @media (max-width:900px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .services-grid{ grid-template-columns:1fr; } }
+  .service-card{
+    background:var(--navy-2);
+    padding:26px 24px;
+    transition:background 0.15s ease;
+  }
+  .service-card:hover{ background:#222b35; }
+  .service-card .num{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--copper);
+    display:block; margin-bottom:12px;
+  }
+  .service-card h3{ font-size:1.02rem; margin-bottom:8px; font-weight:600; }
+  .service-card p{ color:var(--muted); font-size:0.9rem; }
+
+  /* ---------- Process timeline (real sequence) ---------- */
+  .process-list{ display:flex; flex-direction:column; }
+  .process-item{
+    display:grid; grid-template-columns:64px 1fr; gap:24px;
+    padding:26px 0; border-top:1px solid var(--line);
+  }
+  .process-item:last-child{ border-bottom:1px solid var(--line); }
+  .process-item .step{
+    font-family:'IBM Plex Mono', monospace; color:var(--copper); font-size:0.95rem; padding-top:2px;
+  }
+  .process-item h3{ font-size:1.05rem; margin-bottom:6px; }
+  .process-item p{ color:var(--muted); font-size:0.92rem; max-width:60ch; }
+
+  /* ---------- Trust strip ---------- */
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden;
+    margin-top:10px;
+  }
+  @media (max-width:700px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+  .stat{ background:var(--navy); padding:26px 22px; }
+  .stat .num{ font-family:'Archivo', sans-serif; font-size:1.9rem; font-weight:800; color:var(--copper-bright); }
+  .stat .lbl{ color:var(--muted); font-size:0.82rem; margin-top:4px; }
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    background:linear-gradient(180deg, var(--panel), var(--navy-2));
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:52px 40px;
+    text-align:center;
+  }
+  .cta-band h2{ font-size:clamp(1.6rem, 3vw, 2.1rem); margin-bottom:14px; }
+  .cta-band p{ color:var(--muted); margin-bottom:28px; }
+  .cta-band-btns{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+  /* ---------- Footer ---------- */
+  footer{ border-top:1px solid var(--line); padding:40px 0; }
+  .foot-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; color:var(--muted); font-size:0.85rem; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand"><span class="bolt">⚡</span> Abraham Electrician</div>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="call-btn" href="tel:+2349014399757">Call 09014399757</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap" style="display:contents;">
+      <div>
+        <div class="eyebrow">Licensed &amp; Insured Electrician</div>
+        <h1>Wiring done right, <span class="accent">the first time.</span></h1>
+        <p class="lede">Abraham Electrician handles everything from a flickering switch to a full panel upgrade — clean work, correct code, no return visits.</p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="tel:+2349014399757">Call for a same-week quote</a>
+          <a class="btn-secondary" href="#services">See what we do</a>
+        </div>
+        <div class="trust-row">
+          <span><span class="dot"></span>Licensed &amp; fully insured</span>
+          <span><span class="dot"></span>24/7 emergency calls</span>
+          <span><span class="dot"></span>Serving the metro area</span>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-head">
+          <span class="mono">MAIN PANEL — 200A</span>
+          <span class="mono live">● LIVE</span>
+        </div>
+        <div class="breaker-grid" id="breakerGrid"></div>
+        <div class="panel-readout" id="readout">Tap a breaker to see what it covers.</div>
+        <div class="panel-foot">Every service below is a circuit we handle — hover or tap to flip it on.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">What we do</div>
+        <h2>Every job runs through one licensed electrician</h2>
+        <p>No subcontractors, no apprentices left alone on your panel. If it involves a wire, a breaker, or a load calculation, it's on this list.</p>
+      </div>
+      <div class="services-grid" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">How a job runs</div>
+        <h2>Five steps, start to certified</h2>
+        <p>The same sequence whether it's a single outlet or a whole-house rewire.</p>
+      </div>
+      <div class="process-list" id="processList"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Why homeowners call Abraham</div>
+        <h2>Numbers, not adjectives</h2>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num">3yrs</div><div class="lbl">Licensed electrical experience</div></div>
+        <div class="stat"><div class="num">100%</div><div class="lbl">Permitted &amp; inspected work</div></div>
+        <div class="stat"><div class="num">&lt;3 hrs</div><div class="lbl">Average emergency response</div></div>
+        <div class="stat"><div class="num">0</div><div class="lbl">Callbacks for failed inspections</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="cta-band">
+        <h2>Something not working right?</h2>
+        <p>Tell Abraham what's going on — most calls get a same-week appointment, and emergencies get same-day.</p>
+        <div class="cta-band-btns">
+          <a class="btn-primary" href="tel:+2349014399757">Call 09014399757</a>
+          <a class="btn-secondary" href="mailto: femiadekoya467@gmail.com">Email instead</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© 2026 Abraham Electrician · Licensed &amp; Insured · Lic #EL-48213</span>
+    <span>Serving the greater metro area · 24/7 emergency line</span>
+  </div>
+</footer>
+
+<script>
+  const services = [
+    { name:"Panel upgrades", desc:"Replacing outdated fuse boxes and undersized panels with 100–400A service to match your home's real load." },
+    { name:"EV charger install", desc:"Dedicated circuits and Level 2 charger installs, sized correctly so nothing trips at 2am." },
+    { name:"Lighting & fixtures", desc:"Recessed, pendant, and outdoor lighting, wired and dimmer-compatible from the start." },
+    { name:"Troubleshooting", desc:"Tracing flickering lights, dead outlets, and tripping breakers back to the actual fault." },
+    { name:"Outlets & switches", desc:"New circuits, GFCI/AFCI upgrades, and smart switch or outlet installs." },
+    { name:"Ceiling fans", desc:"Fan-rated boxes and wiring so the fan is supported and the switch does what it says." },
+    { name:"Code compliance", desc:"Pre-sale inspections and corrections so your wiring passes without surprises." },
+    { name:"Emergency service", desc:"Sparking outlets, burning smells, or a dead panel — answered 24/7." },
+    { name:"Generator hookups", desc:"Transfer switches and interlocks so backup power can't backfeed the grid." },
+    { name:"Surge protection", desc:"Whole-home surge protection at the panel, ahead of the electronics it's meant to save." },
+    { name:"Commercial wiring", desc:"Tenant improvements, office circuits, and equipment hookups for small businesses." },
+    { name:"Whole-home rewiring", desc:"Full rewires for older homes still running on knob-and-tube or aluminum wiring." }
+  ];
+
+  const process = [
+    { step:"01", title:"You call or text", body:"Describe the problem — Abraham gives you a real time window, not a vague half-day slot." },
+    { step:"02", title:"On-site diagnosis", body:"We trace the actual cause before touching anything, using a meter, not a guess." },
+    { step:"03", title:"Written quote", body:"A flat price before work starts. No hourly surprises once the panel's open." },
+    { step:"04", title:"The fix", body:"Work done to code, with the right wire gauge and breaker rating for the load." },
+    { step:"05", title:"Test & sign-off", body:"Every circuit tested under load before we call it done, permit closed if one was pulled." }
+  ];
+
+  const grid = document.getElementById('breakerGrid');
+  const readout = document.getElementById('readout');
+
+  services.slice(0,6).forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'breaker';
+    btn.innerHTML = `<span class="label">${s.name}</span><span class="switch-track"><span class="switch-knob"></span></span>`;
+    const activate = () => {
+      document.querySelectorAll('.breaker').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      readout.innerHTML = `<span class="service-name">${s.name}</span> — ${s.desc}`;
+    };
+    btn.addEventListener('mouseenter', activate);
+    btn.addEventListener('focus', activate);
+    btn.addEventListener('click', activate);
+    grid.appendChild(btn);
+  });
+
+  const servicesGrid = document.getElementById('servicesGrid');
+  services.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.innerHTML = `<span class="num">${String(i+1).padStart(2,'0')}</span><h3>${s.name}</h3><p>${s.desc}</p>`;
+    servicesGrid.appendChild(card);
+  });
+
+  const processList = document.getElementById('processList');
+  process.forEach(p => {
+    const row = document.createElement('div');
+    row.className = 'process-item';
+    row.innerHTML = `<div class="step">${p.step}</div><div><h3>${p.title}</h3><p>${p.body}</p></div>`;
+    processList.appendChild(row);
+  });
+</script>
+
+</body>
+</html>
